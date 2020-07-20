@@ -1,21 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import 'react-native-gesture-handler';
+import * as React from 'react';
+//components 
+import { Onboarding } from "./src/authentification/Onboarding";
+// navigation 
+
+import { createStackNavigator } from '@react-navigation/stack';
+import { LoadAssets } from './src/components';
+
+const AuthentificationStack = createStackNavigator();
+
+const AuthentificationNavigator = () => {
+  return (<AuthentificationStack.Navigator headerMode="none">
+    <AuthentificationStack.Screen name="Onboarding" component={Onboarding} />
+  </AuthentificationStack.Navigator>)
+}
+
+// fonts 
+const fonts={
+  "SFProText-Bold": require('./assets/fonts/SF-Pro-Text-Bold.otf'),
+  "SFProText-SemiBold": require('./assets/fonts/SF-Pro-Text-Semibold.otf'),
+  "SFProText-Regular": require('./assets/fonts/SF-Pro-Text-Regular.otf')
+}
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <LoadAssets {...{fonts}}>
+        <AuthentificationNavigator />
+    </LoadAssets>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
